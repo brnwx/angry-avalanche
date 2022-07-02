@@ -1,10 +1,10 @@
 #!/bin/bash
 
-read -p "output filename: " file_name
+read -p "output prefix: " file_prefix
 
 sudo systemctl stop wpa_supplicant.service
 sudo systemctl stop NetworkManager.service
 
-sudo hcxdumptool -i wlan0 -o $file_name.pcapng --active_beacon --enable_status=15
+sudo hcxdumptool -i wlan0 -o $file_prefix.pcapng --active_beacon --enable_status=15
 
-hcxpcapngtool -o $file_name_hashcat.22000 -E essidlist $file_name.pcapng
+hcxpcapngtool -o $file_prefix_hashcat.22000 -E essidlist $file_prefix.pcapng

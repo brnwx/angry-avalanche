@@ -1,8 +1,8 @@
 !/bin/bash
 
-read -p "output filename: " file_name
+read -p "output prefix: " file_prefix
 
 sudo systemctl start wpa_supplicant.service
 sudo systemctl start NetworkManager.service
 
-hcxpcapngtool -o $file_name.hashcat.22000 -E essidlist $file_name.pcapng
+hcxpcapngtool -o $file_prefix.hashcat.22000 -E essidlist $file_prefix.pcapng
