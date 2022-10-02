@@ -60,4 +60,4 @@ echo "############################################################"
 echo "##             Executing Passphrase Attack                ##"
 echo "############################################################"
 echo
-hashcat -m 22000 $1 -r $HOME/sec/rules/best64.rule -w 3  --quiet ./passphrase\ attack/passphrases.txt
+hashcat -m 22000 $1 -r  $HOME/sec/passphrase\ attack/passphrase-rule1.rule -w 3  --quiet $HOME/sec/passphrase\ attack/passphrases.txt
