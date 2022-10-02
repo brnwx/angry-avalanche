@@ -20,12 +20,12 @@ else
     wget https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt
 fi
 
-DIVE_FILE=dive.rule
-if [ -f "$DIVE_FILE" ]; then
-    echo "$DIVE_FILE exists."
-else 
-    wget https://raw.githubusercontent.com/hashcat/hashcat/master/rules/dive.rule
-fi
+#DIVE_FILE=dive.rule
+#if [ -f "$DIVE_FILE" ]; then
+#    echo "$DIVE_FILE exists."
+#else 
+#    wget https://raw.githubusercontent.com/hashcat/hashcat/master/rules/dive.rule
+#fi
 
 ORTRTE_FILE=OneRuleToRuleThemAll.rule
 if [ -f "$ORTRTE_FIL" ]; then
@@ -37,14 +37,6 @@ fi
 
 hashcat -a 0 -m 22000 $1 -w 3 --quiet -r OneRuleToRuleThemAll.rule rockyou.txt
 
-NO_SPACES_RULE=nos-spaces.rule
-if [ -f "$NO_SPACE_RULE" ]; then
-    echo "$NO_SPACES_RULE exists."
-else
-    echo ":" > no-spaces.rule
-    echo "@ " >> no-spaces.rule
-fi
-
 
 echo "############################################################"
 echo "##               Trying Passphrase attack                 ##"
@@ -54,7 +46,11 @@ if [ -f "$PASSPHRASE_LIST" ]; then
     echo "$PASSPHRASE_LIST exists."
 else
     wget https://f002.backblazeb2.com/file/passphrase-wordlist/passphrases.txt
-    #wget https://github.com/initstring/passphrase-wordlist/blob/master/hashcat-rules/passphrase-rule1.rule
-    #wget https://github.com/initstring/passphrase-wordlist/blob/master/hashcat-rules/passphrase-rule2.rule
 fi
-hashcat -a 0 -m 22000 $1 passphrases.txt --quiet -r no-spaces.rule -w 3
+PASSPHRASE_RULE_1=passphrase-rule1.rule
+if [ -f "$PASSPHRASE_RULE_1" ]; then
+    echo "$PASSPHRASE_RULE_1 exists."
+else 
+    wget https://raw.githubusercontent.com/initstring/passphrase-wordlist/master/hashcat-rules/passphrase-rule1.rule
+fi
+hashcat -a 0 -m 22000 $1 passphrases.txt --quiet -r passphrase-rule1.rule -w 3
