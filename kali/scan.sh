@@ -7,4 +7,5 @@ sudo systemctl stop NetworkManager.service
 
 sudo hcxdumptool -i wlan0 -o $file_prefix.pcapng --active_beacon --enable_status=15
 
-hcxpcapngtool -o $file_prefix_hashcat.22000 -E essidlist $file_prefix.pcapng
+sudo systemctl start NetworkManager.service
+sudo systemctl start wpa_supplicant.service

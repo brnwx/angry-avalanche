@@ -1,5 +1,6 @@
 !/bin/bash
 
+# TODO Replace with hcxhashtool
 read -p "output prefix: " file_prefix
 
 sudo systemctl start wpa_supplicant.service
