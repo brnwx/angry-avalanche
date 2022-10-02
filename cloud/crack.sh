@@ -27,8 +27,15 @@ else
     wget https://raw.githubusercontent.com/hashcat/hashcat/master/rules/dive.rule
 fi
 
-# wget https://raw.githubusercontent.com/NotSoSecure/password_cracking_rules/master/OneRuleToRuleThemAll.rule
-hashcat -a 0 -m 22000 $1 -w 3 --quiet -r dive.rule rockyou.txt
+ORTRTE_FILE=OneRuleToRuleThemAll.rule
+if [ -f "$ORTRTE_FIL" ]; then
+    echo "$ORTRTE_FIL exists."
+else 
+    wget https://raw.githubusercontent.com/NotSoSecure/password_cracking_rules/master/OneRuleToRuleThemAll.rule
+fi
+
+
+hashcat -a 0 -m 22000 $1 -w 3 --quiet -r OneRuleToRuleThemAll.rule rockyou.txt
 
 NO_SPACES_RULE=nos-spaces.rule
 if [ -f "$NO_SPACE_RULE" ]; then
