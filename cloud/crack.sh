@@ -27,16 +27,24 @@ fi
 #    wget https://raw.githubusercontent.com/hashcat/hashcat/master/rules/dive.rule
 #fi
 
-ORTRTE_FILE=OneRuleToRuleThemAll.rule
-if [ -f "$ORTRTE_FIL" ]; then
-    echo "$ORTRTE_FIL exists."
-else 
-    wget https://raw.githubusercontent.com/NotSoSecure/password_cracking_rules/master/OneRuleToRuleThemAll.rule
+BEST_64=best64.rule
+if [ -f "best64.rule" ]; then
+    echo "$BEST_64 exists."
+else
+    wget https://raw.githubusercontent.com/hashcat/hashcat/master/rules/best64.rule
 fi
+echo "💀 |   Using Best64 rule"
+hashcat -a 0 -m 22000 $1 -w 3 --quiet -r best64.rule rockyou.txt
 
 
-hashcat -a 0 -m 22000 $1 -w 3 --quiet -r OneRuleToRuleThemAll.rule rockyou.txt
-
+#ORTRTE_FILE=OneRuleToRuleThemAll.rule
+#if [ -f "$ORTRTE_FIL" ]; then
+#    echo "$ORTRTE_FIL exists."
+#else 
+#    wget https://raw.githubusercontent.com/NotSoSecure/password_cracking_rules/master/OneRuleToRuleThemAll.rule
+#fi
+#echo "💀 |   Using OneRuleToRuleThemAll rule"
+#hashcat -a 0 -m 22000 $1 -w 3 --quiet -r OneRuleToRuleThemAll.rule rockyou.txt
 
 echo "############################################################"
 echo "##               Trying Passphrase attack                 ##"
@@ -53,4 +61,5 @@ if [ -f "$PASSPHRASE_RULE_1" ]; then
 else 
     wget https://raw.githubusercontent.com/initstring/passphrase-wordlist/master/hashcat-rules/passphrase-rule1.rule
 fi
+echo "💀 |   Using Passphrase rule 1"
 hashcat -a 0 -m 22000 $1 passphrases.txt --quiet -r passphrase-rule1.rule -w 3
