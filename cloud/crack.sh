@@ -28,7 +28,7 @@ fi
 #fi
 
 BEST_64=best64.rule
-if [ -f "best64.rule" ]; then
+if [ -f "$BEST_64" ]; then
     echo "$BEST_64 exists."
 else
     wget https://raw.githubusercontent.com/hashcat/hashcat/master/rules/best64.rule
