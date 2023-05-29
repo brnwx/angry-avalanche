@@ -53,13 +53,19 @@ PASSPHRASE_LIST=passphrases.txt
 if [ -f "$PASSPHRASE_LIST" ]; then
     echo "$PASSPHRASE_LIST exists."
 else
-    wget https://f002.backblazeb2.com/file/passphrase-wordlist/passphrases.txt
+    wget https://github.com/initstring/passphrase-wordlist/releases/download/v2022.1/passphrases.txt
 fi
 PASSPHRASE_RULE_1=passphrase-rule1.rule
 if [ -f "$PASSPHRASE_RULE_1" ]; then
     echo "$PASSPHRASE_RULE_1 exists."
 else 
-    wget https://raw.githubusercontent.com/initstring/passphrase-wordlist/master/hashcat-rules/passphrase-rule1.rule
+    wget https://github.com/initstring/passphrase-wordlist/blob/master/hashcat-rules/passphrase-rule1.rule
 fi
-echo "💀 |   Using Passphrase rule 1"
-hashcat -a 0 -m 22000 $1 passphrases.txt --quiet -r passphrase-rule1.rule -w 3
+PASSPHRASE_RULE_2=passphrase-rule1.rule
+if [ -f "$PASSPHRASE_RULE_2" ]; then
+    echo "$PASSPHRASE_RULE_2 exists."
+else 
+    wget https://github.com/initstring/passphrase-wordlist/blob/master/hashcat-rules/passphrase-rule2.rule
+fi
+echo "💀 |   Executing Passphrase Attack"
+hashcat -a 0 -m 22000 $1 passphrases.txt --quiet -r passphrase-rule1.rule -r passphrase-rule2.rule -w 3
