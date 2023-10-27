@@ -8,6 +8,15 @@ hashcat -m 22000 $1 -w 3 --quiet -a3 -1 "?d" "415?1?1?1?1?1?1?1"
 echo "💀 |   Trying all 628 numbers"
 hashcat -m 22000 $1 -w 3 --quiet -a3 -1 "?d" "628?1?1?1?1?1?1?1"
 
+echo "############################################################"
+echo "##                  Downloading Best64                    ##"
+echo "############################################################"
+BEST_64=best64.rule
+if [ -f "$BEST_64" ]; then
+    echo "$BEST_64 exists."
+else
+    wget https://raw.githubusercontent.com/hashcat/hashcat/master/rules/best64.rule
+fi
 
 echo "############################################################"
 echo "##              Trying the Rockyou Wordlist               ##"
@@ -27,12 +36,6 @@ fi
 #    wget https://raw.githubusercontent.com/hashcat/hashcat/master/rules/dive.rule
 #fi
 
-BEST_64=best64.rule
-if [ -f "$BEST_64" ]; then
-    echo "$BEST_64 exists."
-else
-    wget https://raw.githubusercontent.com/hashcat/hashcat/master/rules/best64.rule
-fi
 echo "💀 |   Using Best64 rule"
 hashcat -a 0 -m 22000 $1 -w 3 --quiet -r best64.rule rockyou.txt
 
