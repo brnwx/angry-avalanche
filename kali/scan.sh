@@ -5,7 +5,7 @@ read -p "output prefix: " file_prefix
 sudo systemctl stop wpa_supplicant.service
 sudo systemctl stop NetworkManager.service
 
-sudo hcxdumptool -i wlan0 -o $file_prefix.pcapng --active_beacon --enable_status=15
+sudo hcxdumptool -i wlan0 -w $file_prefix.pcapng
 
 sudo systemctl start NetworkManager.service
 sudo systemctl start wpa_supplicant.service
