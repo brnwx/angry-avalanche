@@ -38,7 +38,7 @@ fi
 #fi
 
 echo "💀 |   Using Best64 rule"
-hashcat -a 0 -m 22000 $1 -w 3 --quiet --session vast -r best64.rule rockyou-withcount.txt
+hashcat -a 0 -m 22000 $1 -w 3 --quiet --session vast -r best66.rule rockyou-withcount.txt
 
 
 #ORTRTE_FILE=OneRuleToRuleThemAll.rule
