@@ -11,7 +11,7 @@ hashcat -m 22000 $1 -w 3 --quiet -a3 -1 "?d" "628?1?1?1?1?1?1?1"
 echo "############################################################"
 echo "##                  Downloading Best64                    ##"
 echo "############################################################"
-BEST_66=best64.rule
+BEST_66=best66.rule
 if [ -f "$BEST_66" ]; then
     echo "$BEST_66 exists."
 else
@@ -63,13 +63,13 @@ PASSPHRASE_RULE_1=passphrase-rule1.rule
 if [ -f "$PASSPHRASE_RULE_1" ]; then
     echo "$PASSPHRASE_RULE_1 exists."
 else 
-    wget https://github.com/initstring/passphrase-wordlist/blob/master/hashcat-rules/passphrase-rule1.rule
+    wget https://github.com/initstring/passphrase-wordlist/raw/master/hashcat-rules/passphrase-rule1.rule
 fi
-#PASSPHRASE_RULE_2=passphrase-rule1.rule
-#if [ -f "$PASSPHRASE_RULE_2" ]; then
-#    echo "$PASSPHRASE_RULE_2 exists."
-#else 
-#    wget https://github.com/initstring/passphrase-wordlist/blob/master/hashcat-rules/passphrase-rule2.rule#
-#fi
+PASSPHRASE_RULE_2=passphrase-rule1.rule
+if [ -f "$PASSPHRASE_RULE_2" ]; then
+    echo "$PASSPHRASE_RULE_2 exists."
+else 
+    wget https://github.com/initstring/passphrase-wordlist/raw/master/hashcat-rules/passphrase-rule2.rule
+fi
 echo "💀 |   Executing Passphrase Attack"
-hashcat -a 0 -m 22000 $1 passphrases.txt --quiet -r passphrase-rule1.rule -w 3
+hashcat -a 0 -m 22000 $1 passphrases.txt --quiet -r passphrase-rule1.rule -r passphrase-rule2.rule  -w 3
