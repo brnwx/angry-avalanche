@@ -22,7 +22,7 @@ echo "############################################################"
 echo "##              Trying the Rockyou Wordlist               ##"
 echo "############################################################"
 
-ROCK_FILE=rockyou.txt
+ROCK_FILE=rockyou-withcount.txt
 if [ -f "$ROCK_FILE" ]; then
     echo "$ROCK_FILE exists."
 else 
@@ -37,7 +37,7 @@ fi
 #    wget https://raw.githubusercontent.com/hashcat/hashcat/master/rules/dive.rule
 #fi
 
-echo "💀 |   Using Best64 rule"
+echo "💀 |   Using Best66 rule"
 hashcat -a 0 -m 22000 $1 -w 3 --quiet --session vast -r best66.rule rockyou-withcount.txt
 
 
@@ -65,11 +65,11 @@ if [ -f "$PASSPHRASE_RULE_1" ]; then
 else 
     wget https://github.com/initstring/passphrase-wordlist/blob/master/hashcat-rules/passphrase-rule1.rule
 fi
-PASSPHRASE_RULE_2=passphrase-rule1.rule
-if [ -f "$PASSPHRASE_RULE_2" ]; then
-    echo "$PASSPHRASE_RULE_2 exists."
-else 
-    wget https://github.com/initstring/passphrase-wordlist/blob/master/hashcat-rules/passphrase-rule2.rule
-fi
+#PASSPHRASE_RULE_2=passphrase-rule1.rule
+#if [ -f "$PASSPHRASE_RULE_2" ]; then
+#    echo "$PASSPHRASE_RULE_2 exists."
+#else 
+#    wget https://github.com/initstring/passphrase-wordlist/blob/master/hashcat-rules/passphrase-rule2.rule#
+#fi
 echo "💀 |   Executing Passphrase Attack"
-hashcat -a 0 -m 22000 $1 passphrases.txt --quiet -r passphrase-rule1.rule -r passphrase-rule2.rule -w 3
+hashcat -a 0 -m 22000 $1 passphrases.txt --quiet -r passphrase-rule1.rule -w 3
