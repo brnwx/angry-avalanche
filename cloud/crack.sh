@@ -15,7 +15,8 @@ BEST_66=best66.rule
 if [ -f "$BEST_66" ]; then
     echo "$BEST_66 exists."
 else
-    wget https://raw.githubusercontent.com/hashcat/hashcat/master/rules/best66.rule
+    echo "Downloading the Best 66 rule..."
+    wget -q https://raw.githubusercontent.com/hashcat/hashcat/master/rules/best66.rule
 fi
 
 echo "############################################################"
@@ -25,8 +26,9 @@ echo "############################################################"
 ROCK_FILE=rockyou-withcount.txt
 if [ -f "$ROCK_FILE" ]; then
     echo "$ROCK_FILE exists."
-else 
-    wget https://github.com/danielmiessler/SecLists/raw/master/Passwords/Leaked-Databases/rockyou-withcount.txt.tar.gz
+else
+    echo "Downloading the Rock You wordlist..."
+    wget -q https://github.com/danielmiessler/SecLists/raw/master/Passwords/Leaked-Databases/rockyou-withcount.txt.tar.gz
     tar -xf rockyou-withcount.txt.tar.gz
 fi
 
@@ -57,19 +59,22 @@ PASSPHRASE_LIST=passphrases.txt
 if [ -f "$PASSPHRASE_LIST" ]; then
     echo "$PASSPHRASE_LIST exists."
 else
-    wget https://github.com/initstring/passphrase-wordlist/releases/download/v2022.1/passphrases.txt
+    echo "Downloading passphrases..."
+    wget -q https://github.com/initstring/passphrase-wordlist/releases/download/v2022.1/passphrases.txt
 fi
 PASSPHRASE_RULE_1=passphrase-rule1.rule
 if [ -f "$PASSPHRASE_RULE_1" ]; then
     echo "$PASSPHRASE_RULE_1 exists."
 else 
-    wget https://github.com/initstring/passphrase-wordlist/raw/master/hashcat-rules/passphrase-rule1.rule
+    echo "Downloading passphrase rule 1"
+    wget -q https://github.com/initstring/passphrase-wordlist/raw/master/hashcat-rules/passphrase-rule1.rule
 fi
 PASSPHRASE_RULE_2=passphrase-rule2.rule
 if [ -f "$PASSPHRASE_RULE_2" ]; then
     echo "$PASSPHRASE_RULE_2 exists."
 else 
-    wget https://github.com/initstring/passphrase-wordlist/raw/master/hashcat-rules/passphrase-rule2.rule
+    echo "Downloading passphrase rule 2"
+    wget -q https://github.com/initstring/passphrase-wordlist/raw/master/hashcat-rules/passphrase-rule2.rule
 fi
 echo "💀 |   Executing Passphrase Attack"
 hashcat -a 0 -m 22000 $1 passphrases.txt --quiet -r passphrase-rule1.rule -r passphrase-rule2.rule  -w 3
