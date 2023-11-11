@@ -12,14 +12,6 @@ echo "############################################################"
 echo "##              Trying the Rockyou Wordlist               ##"
 echo "############################################################"
 
-BEST_66=best66.rule
-if [ -f "$BEST_66" ]; then
-    echo "$BEST_66 exists."
-else
-    echo "Downloading the Best 66 rule..."
-    wget -q https://raw.githubusercontent.com/hashcat/hashcat/master/rules/best66.rule
-fi
-
 ROCK_FILE=rockyou-withcount.txt
 if [ -f "$ROCK_FILE" ]; then
     echo "$ROCK_FILE exists."
@@ -27,6 +19,14 @@ else
     echo "Downloading the Rock You wordlist..."
     wget -q https://github.com/danielmiessler/SecLists/raw/master/Passwords/Leaked-Databases/rockyou-withcount.txt.tar.gz
     tar -xf rockyou-withcount.txt.tar.gz
+fi
+
+BEST_66=best66.rule
+if [ -f "$BEST_66" ]; then
+    echo "$BEST_66 exists."
+else
+    echo "Downloading the Best 66 rule..."
+    wget -q https://raw.githubusercontent.com/hashcat/hashcat/master/rules/best66.rule
 fi
 
 echo "💀 |   Using Best66 rule"
