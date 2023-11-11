@@ -11,11 +11,11 @@ hashcat -m 22000 $1 -w 3 --quiet -a3 -1 "?d" "628?1?1?1?1?1?1?1"
 echo "############################################################"
 echo "##                  Downloading Best64                    ##"
 echo "############################################################"
-BEST_64=best64.rule
-if [ -f "$BEST_64" ]; then
-    echo "$BEST_64 exists."
+BEST_66=best64.rule
+if [ -f "$BEST_66" ]; then
+    echo "$BEST_66 exists."
 else
-    wget https://raw.githubusercontent.com/hashcat/hashcat/master/rules/best64.rule
+    wget https://raw.githubusercontent.com/hashcat/hashcat/master/rules/best66.rule
 fi
 
 echo "############################################################"
@@ -26,7 +26,8 @@ ROCK_FILE=rockyou.txt
 if [ -f "$ROCK_FILE" ]; then
     echo "$ROCK_FILE exists."
 else 
-    wget https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt
+    wget https://github.com/danielmiessler/SecLists/raw/master/Passwords/Leaked-Databases/rockyou-withcount.txt.tar.gz
+    tar -xf rockyou-withcount.txt.tar.gz
 fi
 
 #DIVE_FILE=dive.rule
@@ -37,7 +38,7 @@ fi
 #fi
 
 echo "💀 |   Using Best64 rule"
-hashcat -a 0 -m 22000 $1 -w 3 --quiet -r best64.rule rockyou.txt
+hashcat -a 0 -m 22000 $1 -w 3 --quiet --session vast -r best64.rule rockyou-withcount.txt
 
 
 #ORTRTE_FILE=OneRuleToRuleThemAll.rule
