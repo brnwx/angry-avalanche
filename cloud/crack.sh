@@ -32,16 +32,16 @@ fi
 echo "💀 |   Using Best66 rule"
 hashcat -a 0 -m 22000 $1 -w 3 --quiet --session vast -r best66.rule rockyou-withcount.txt
 
-ROCKYOU30=rockyou-30000.rule
-if [ -f "$ROCKYOU30" ]; then
-    echo "$ROCKYOU30 exists."
-else
-    echo "Downloading the RockYou 30000 rule..."
-    wget -q https://github.com/hashcat/hashcat/raw/master/rules/rockyou-30000.rule
-fi
+#ROCKYOU30=rockyou-30000.rule
+#if [ -f "$ROCKYOU30" ]; then
+#    echo "$ROCKYOU30 exists."
+#else
+#    echo "Downloading the RockYou 30000 rule..."
+#    wget -q https://github.com/hashcat/hashcat/raw/master/rules/rockyou-30000.rule
+#fi
 
-echo "💀 |   Using RockYou 30000 rule"
-hashcat -a 0 -m 22000 $1 -w 3 --quiet --session vast -r rockyou-30000.rule rockyou-withcount.txt
+#echo "💀 |   Using RockYou 30000 rule"
+#hashcat -a 0 -m 22000 $1 -w 3 --quiet --session vast -r rockyou-30000.rule rockyou-withcount.txt
 
 #ORTRTE_FILE=OneRuleToRuleThemAll.rule
 #if [ -f "$ORTRTE_FIL" ]; then
