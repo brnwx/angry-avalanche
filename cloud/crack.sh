@@ -65,7 +65,7 @@ if [ -f "$PASSPHRASE_RULE_1" ]; then
 else 
     wget https://github.com/initstring/passphrase-wordlist/raw/master/hashcat-rules/passphrase-rule1.rule
 fi
-PASSPHRASE_RULE_2=passphrase-rule1.rule
+PASSPHRASE_RULE_2=passphrase-rule2.rule
 if [ -f "$PASSPHRASE_RULE_2" ]; then
     echo "$PASSPHRASE_RULE_2 exists."
 else 
