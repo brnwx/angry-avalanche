@@ -43,7 +43,7 @@ if [ -f "$TOP_1M" ]; then
     echo "$TOP_1M exists."
 else
     echo "Downloading Most Common Top 1M wordlist..."
-    wget https://github.com/danielmiessler/SecLists/raw/master/Passwords/Common-Credentials/10-million-password-list-top-1000000.txt
+    wget -q https://github.com/danielmiessler/SecLists/raw/master/Passwords/Common-Credentials/10-million-password-list-top-1000000.txt
 fi
 
 hashcat -a 0 -m 22000 $1 -w 3 --quiet --session vast -r best66.rule 10-million-password-list-top-1000000.txt
