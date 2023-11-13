@@ -8,6 +8,37 @@ hashcat -m 22000 $1 -w 3 --quiet -a3 -1 "?d" "415?1?1?1?1?1?1?1"
 echo "💀 |   Trying all 628 numbers"
 hashcat -m 22000 $1 -w 3 --quiet -a3 -1 "?d" "628?1?1?1?1?1?1?1"
 
+
+echo "############################################################"
+echo "##              Trying the WPA Top 4800 List              ##"
+echo "############################################################"
+
+WPA_4800=probable-v2-wpa-top4800.txt
+if [ -f "$WPA_4800" ]; then
+    echo "$WPA_4800 exists."
+else
+    echo "Downloading WPA Top 4800 wordlist..."
+    wget -q https://github.com/danielmiessler/SecLists/raw/master/Passwords/WiFi-WPA/probable-v2-wpa-top4800.txt
+fi
+
+hashcat -a 0 -m 22000 $1 -w 3 --quiet --session vast -r best66.rule probable-v2-wpa-top4800.txt
+
+
+echo "############################################################"
+echo "##           Trying the Most Common Top 1M List           ##"
+echo "############################################################"
+
+TOP_1M=probable-v2-wpa-top4800.txt
+if [ -f "$TOP_1M" ]; then
+    echo "$TOP_1M exists."
+else
+    echo "Downloading Most Common Top 1M wordlist..."
+    wget -q https://github.com/danielmiessler/SecLists/raw/master/Passwords/Common-Credentials/10-million-password-list-top-1000000.txt
+fi
+
+hashcat -a 0 -m 22000 $1 -w 3 --quiet --session vast -r best66.rule 10-million-password-list-top-1000000.txt
+
+
 echo "############################################################"
 echo "##              Trying the Rockyou Wordlist               ##"
 echo "############################################################"
@@ -42,6 +73,19 @@ fi
 
 #echo "💀 |   Using RockYou 30000 rule"
 #hashcat -a 0 -m 22000 $1 -w 3 --quiet --session vast -r rockyou-30000.rule rockyou-withcount.txt
+
+echo "############################################################"
+echo "##          Trying the XATO 10 million Wordlist           ##"
+echo "############################################################"
+XATO10M=xato-net-10-million-passwords.txt
+if [ -f "$XATO10M" ]; then
+    echo "$XATO10M exists."
+else
+    echo "Downloading the XATA 10 million list..."
+    wget -q https://github.com/danielmiessler/SecLists/raw/master/Passwords/xato-net-10-million-passwords.txt
+fi
+
+hashcat -a 0 -m 22000 $1 -w 3 --quiet --session vast -r best66.rule xato-net-10-million-passwords.txt
 
 #ORTRTE_FILE=OneRuleToRuleThemAll.rule
 #if [ -f "$ORTRTE_FIL" ]; then
