@@ -38,7 +38,7 @@ echo "############################################################"
 echo "##           Trying the Most Common Top 1M List           ##"
 echo "############################################################"
 
-TOP_1M=probable-v2-wpa-top4800.txt
+TOP_1M=10-million-password-list-top-1000000.txt
 if [ -f "$TOP_1M" ]; then
     echo "$TOP_1M exists."
 else
